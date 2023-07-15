@@ -30,7 +30,7 @@ The repository structure is similar to the questions structure with each file/fo
 - Files: Q2&3/
 - Description: This part of the assignment involved creating a Django-based EHR system with database schema design and API development.
 - Instructions:
-  - Set up and activate a virtual environment.
+  - Set up and activate a python virtual environment.
   - Install the required packages in a given environment using `pip install -r requirements.txt`.
   - Start the Django development server by running `python manage.py runserver` in the project root directory i.e. directory containing `manage.py` file
   - Access "http://127.0.0.1:8000/" in a web browser to view the list of patients with prescribed medicines as shown below:
