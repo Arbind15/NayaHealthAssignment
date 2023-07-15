@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_custom_sales">
+        <t t-call="report.external_layout">
+            <t t-call="report.internal_layout">
+                <div class="page" style="width: 100%; text-align:center; align-content: center;">
+                    <div class="header" style="width: 100%; text-align:center">
+                        <h2>Sales Report of <span t-esc="name"/></h2>
+                        <p>From <span t-esc="from_date"/> to <span t-esc="to_date"/></p>
+                    </div>
+                    <table class="table table-bordered" style="border:solid 1px; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th style="border:solid 1px; border-collapse: collapse;">S.No.</th>
+                                <th style="border:solid 1px; border-collapse: collapse;">Source</th>
+                                <th style="border:solid 1px; border-collapse: collapse;">Invoice No</th>
+                                <th style="border:solid 1px; border-collapse: collapse;">Invoice Date</th>
+                                <th style="border:solid 1px; border-collapse: collapse;">Product</th>
+                                <th style="border:solid 1px; border-collapse: collapse;">Quantity</th>
+                                <th style="border:solid 1px; border-collapse: collapse;">Rate</th>
+                                <th style="border:solid 1px; border-collapse: collapse;">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="sno" t-value="1"/>
+                            <t t-foreach="docs" t-as="inv">
+                                <tr>
+                                    <td style="border:solid 1px; border-collapse: collapse;"><span t-esc="sno"/></td>
+                                    <td style="border:solid 1px; border-collapse: collapse;"><span t-esc="inv.origin"/></td>
+                                    <td style="border:solid 1px; border-collapse: collapse;"><span t-esc="inv.invoice_id.number"/></td>
+                                    <td style="border:solid 1px; border-collapse: collapse;"><span t-esc="inv.create_date"/></td>
+                                    <td style="border:solid 1px; border-collapse: collapse;"><span t-esc="inv.product_id.name"/></td>
+                                    <td style="border:solid 1px; border-collapse: collapse;"><span t-esc="inv.quantity"/></td>
+                                    <td style="border:solid 1px; border-collapse: collapse;"><span t-esc="inv.price_unit"/></td>
+                                    <t t-set="amount_total" t-value="inv.quantity * inv.price_unit"/>
+                                    <td style="border:solid 1px; border-collapse: collapse;"><span t-esc="amount_total"/></td>
+                                </tr>
+                                <t t-set="sno" t-value="sno + 1"/>
+                            </t>
+                            <tr>
+                                <td colspan="7" style="text-align: right;"><strong>Total Amount:</strong></td>
+                                <td><strong><span t-esc="total"/></strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <report
+    id="action_custom_sale_report"
+    string="Custom Sale Report"
+    model="generate.sales.report.wizard"
+    report_type="qweb-pdf"
+    file="custom_sales_report.report_custom_sales"
+    name="custom_sales_report.report_custom_sales"/>
+
+</odoo>
